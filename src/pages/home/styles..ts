@@ -26,9 +26,7 @@ export const Hero = styled("div", {
   padding: "0 $10",
   position: "relative",
 
-  [`${Heading}`]: {},
-
-  [`${Text}`]: {
+  [`> ${Text}`]: {
     marginTop: "$2",
     color: "$gray200",
     width: "100%",
@@ -38,11 +36,11 @@ export const Hero = styled("div", {
     padding: 0,
     textAlign: "center",
 
-    [`${Heading}`]: {
+    [`> ${Heading}`]: {
       fontSize: "$6xl",
     },
 
-    [`${Text}`]: {
+    [`> ${Text}`]: {
       margin: "0 auto",
       marginTop: "$2",
       fontSize: "$lg",
@@ -54,7 +52,7 @@ export const Hero = styled("div", {
     padding: 0,
     textAlign: "center",
 
-    [`${Heading}`]: {
+    [`> ${Heading}`]: {
       fontSize: "$5xl",
     },
   },
@@ -64,7 +62,7 @@ export const HeroBg = styled("div", {
   position: "absolute",
   overflow: "hidden",
   top: -150,
-  zIndex: 0,
+  zIndex: -1,
 
   "@media(max-width: 720px)": {
     left: -150,
