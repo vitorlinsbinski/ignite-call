@@ -21,7 +21,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   timeIntervals UserTimeInterval[]
-  scheduling Scheduling[]
+  scheduling    Scheduling[]
 
 
   @@map("users")
@@ -42,8 +42,9 @@ model Account {
   session_state      String?
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
+  
   @@unique([provider, provider_account_id])
+  @@index([user_id])
   @@map("accounts")
 }
 
@@ -55,6 +56,7 @@ model Session {
   user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("sessions") // Transforma o nome da tabela
+  @@index([user_id])
 }
 
 model UserTimeInterval {
@@ -66,6 +68,7 @@ model UserTimeInterval {
   user User @relation(fields: [user_id], references: [id])
   user_id String
 
+  @@index([user_id])
   @@map("user_time_intervals")
 }
 
@@ -80,5 +83,6 @@ model Scheduling {
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
+  @@index([user_id])
   @@map("schedulings")
 }
