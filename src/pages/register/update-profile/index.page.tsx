@@ -19,6 +19,7 @@ import { getServerSession } from "next-auth/next";
 import { buildNextAuthOptions } from "../../api/auth/[...nextauth].api";
 import { api } from "@/src/lib/axios";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 const updateProfileSchema = z.object({
   bio: z.string(),
@@ -48,34 +49,38 @@ export default function UpdateProfile() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Heading as="strong">Defina sua disponibilidade</Heading>
-        <Text>Por último, uma breve descrição e uma foto de perfil.</Text>
+    <>
+      <NextSeo title="Atualize seu perfil | Ignite Call" noindex />
 
-        <MultiStep size={4} currentStep={4}></MultiStep>
-      </Header>
+      <Container>
+        <Header>
+          <Heading as="strong">Defina sua disponibilidade</Heading>
+          <Text>Por último, uma breve descrição e uma foto de perfil.</Text>
 
-      <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
-        <label>
-          <Text>Foto de perfil</Text>
-          <Avatar
-            src={session.data?.user.avatar_url}
-            alt={session.data?.user.name}
-          />
-        </label>
+          <MultiStep size={4} currentStep={4}></MultiStep>
+        </Header>
 
-        <label>
-          <Text size={"sm"}>Sobre você</Text>
-          <TextArea {...register("bio")} />
-          <FormAnnotation size={"sm"}></FormAnnotation>
-        </label>
+        <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
+          <label>
+            <Text>Foto de perfil</Text>
+            <Avatar
+              src={session.data?.user.avatar_url}
+              alt={session.data?.user.name}
+            />
+          </label>
 
-        <Button type="submit" disabled={isSubmitting}>
-          Finalizar <ArrowRight />
-        </Button>
-      </ProfileBox>
-    </Container>
+          <label>
+            <Text size={"sm"}>Sobre você</Text>
+            <TextArea {...register("bio")} />
+            <FormAnnotation size={"sm"}></FormAnnotation>
+          </label>
+
+          <Button type="submit" disabled={isSubmitting}>
+            Finalizar <ArrowRight />
+          </Button>
+        </ProfileBox>
+      </Container>
+    </>
   );
 }
 
