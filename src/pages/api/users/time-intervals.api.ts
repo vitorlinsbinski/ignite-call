@@ -5,20 +5,13 @@ import { z } from "zod";
 import { prisma } from "@/src/lib/prisma";
 
 const timeIntervalsBodySchema = z.object({
-  intervals: z
-    .array(
-      z.object({
-        weekDay: z.number(),
-        startTimeInMinutes: z.number(),
-        endTimeInMinutes: z.number(),
-      })
-    )
-    .refine((intervals) =>
-      intervals.every(
-        (interval) =>
-          interval.endTimeInMinutes - 60 >= interval.startTimeInMinutes
-      )
-    ),
+  intervals: z.array(
+    z.object({
+      weekDay: z.number(),
+      startTimeInMinutes: z.number(),
+      endTimeInMinutes: z.number(),
+    })
+  ),
 });
 
 export default async function handler(
