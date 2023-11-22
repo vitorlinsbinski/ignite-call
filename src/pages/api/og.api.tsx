@@ -1,15 +1,10 @@
-import { prisma } from "@/src/lib/prisma";
 import { ImageResponse } from "@vercel/og";
-import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   runtime: "edge",
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler() {
   return new ImageResponse(
     (
       <div
